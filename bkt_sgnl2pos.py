@@ -7,8 +7,6 @@
 import numpy as np
 import pandas as pd
 import os
-if not os.path.exists('./result/'):   #os：operating system，包含操作系统功能，可以进行文件操作
-    os.mkdir('./result/') #如果存在那就是这个result_path，如果不存在那就新建一个
 
 def read_futdata(file_name):
     data_temp = pd.read_csv("./data/"+file_name+".csv",index_col=0,low_memory=False)
@@ -17,15 +15,11 @@ def read_futdata(file_name):
     data_temp = data_temp[data_temp.index.isnull() == False]
     return data_temp
 
-def _gt(x1, x2):
-    return np.where(x1>x2, 1, 0)
-
 def sgnl2pos(sgnl_input, start_time = '09:30:00', end_time = '15:00:00',shift_period = 1):
-    # sgnl_input, start_time, end_time= data_score ,'09:30:00','15:00:00'
     sgnl = np.sign(sgnl_input[['sgnl']])
     pos_open_t = pd.Timestamp(start_time).time() # 设置不交易的时间，将信号归零
     pos_end_t = pd.Timestamp(end_time).time()
-    sgnl.index = pd.to_datetime(sgnl.index) 
+    sgnl.index = pd.to_datetime(sgnl_input['DateTime'])
     sgnl.loc[:,'Date'] = sgnl.index.date
     sgnl.loc[:,'Time'] = sgnl.index.time
     sgnl.loc[(sgnl['Time'] <= pos_open_t) | (sgnl['Time'] >= pos_end_t),'sgnl'] = np.nan
