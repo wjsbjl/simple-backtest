@@ -1,0 +1,19 @@
+site_name: Github主流回测项目梳理
+theme:
+  name: material
+
+nav:
+  - Home: index.md
+  - BackTrader: backtrader.md
+  # - qlib: qlib.md
+  - vnpy: vnpy.md
+  #   - Introduction: introduction.md
+  #   - Features: index1.md
+  # - WorldQuant:
+  #   - Datasets: index.md
+  #   - Operators: 
+  #     - Arithmetic Operators: index1.md
+  #     - Logical Operators: index1.md
+  #     - Time Series Operators: index1.md
+  #     - Cross Sectional Operators: index1.md
+  #     - Vector Operators: index1.md
